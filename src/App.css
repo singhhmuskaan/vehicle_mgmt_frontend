@@ -35,7 +35,7 @@ form {
 }
 
 form .form-group {
-  width: calc(50% - 10px); /* Two fields per row with spacing */
+  width: calc(50% - 10px);
   display: flex;
   flex-direction: column;
 }
@@ -75,6 +75,12 @@ form select:focus {
   border-color: #61dafb;
   box-shadow: 0 0 5px rgba(97, 218, 251, 0.5);
 }
+.selected-week {
+  background-color: rgba(135, 206, 250, 0.5);
+  border: 2px solid #87CEFA;
+  border-radius: 5px;
+  padding: 10px;
+}
 
 form button {
   width: 100%;
@@ -95,7 +101,7 @@ form button:hover {
 
 @media (max-width: 600px) {
   form .form-group {
-    width: 100%; /* Full width fields on smaller screens */
+    width: 100%;
   }
 
   .App-header {
@@ -153,11 +159,19 @@ body {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s;
   cursor: pointer;
+  width: 200px;
+  color: white;
 }
 
 .duty-card:hover {
   transform: scale(1.05);
   background-color: #444455;
+}
+
+.hover-label {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .duty-card p {

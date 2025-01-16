@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button, Form, Alert } from "react-bootstrap";
 import axios from "axios";
+import {BASE_URL} from "../apiConfig";
 
 const DutyForm = () => {
     const [formData, setFormData] = useState({
@@ -23,10 +24,10 @@ const DutyForm = () => {
     useEffect(() => {
         const fetchVehicleAndCrew = async () => {
             try {
-                const vehicleResponse = await axios.get("http://localhost:5000/api/vehicles");
+                const vehicleResponse = await axios.get(`${BASE_URL}/vehicles`);
                 setVehicles(vehicleResponse.data);
 
-                const crewResponse = await axios.get("http://localhost:5000/api/crew");
+                const crewResponse = await axios.get(`${BASE_URL}/crew`);
                 setCrew(crewResponse.data);
 
                 // Separate crew by roles
@@ -67,7 +68,7 @@ const DutyForm = () => {
         if (!validateForm()) return;
 
         try {
-            const response = await axios.post("http://localhost:5000/api/duties", formData);
+            const response = await axios.post(`${BASE_URL}/duties`, formData);
             setSuccess("Duty successfully added!");
             setErrors({});
             setFormData({
