@@ -16,6 +16,8 @@
   border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
   color: white;
+  height: 300px;
+  margin-bottom:400px;
 }
 
 h2 {
@@ -131,7 +133,7 @@ body {
 
 .week-view {
   display: flex;
-  gap: 10px;
+  padding-top: 60px;
   justify-content: center;
 }
 
@@ -139,8 +141,7 @@ body {
   flex: 1;
   background-color: #282c34;
   padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
 }
 
 .day-column h3 {
@@ -152,26 +153,44 @@ body {
 
 .duty-card {
   background-color: #333344;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 10px;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
   text-align: left;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
-  width: 200px;
-  color: white;
+  color: #ffffff;
+  width: 220px;
+  position: relative;
 }
 
-.duty-card:hover {
-  transform: scale(1.05);
-  background-color: #444455;
+.duty-card p {
+  margin: 6px 0;
+  font-size: 0.9rem;
 }
+
+.duty-card strong {
+  font-size: 1rem;
+}
+
+.duty-card .yellow-line {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 4px;
+  width: 50%;
+  background-color: #e5a335;
+  border-bottom-left-radius: 8px;
+}
+
 
 .hover-label {
-  margin-top: 8px;
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 0.8rem;
+  color: #aaaaaa;
+  margin-top: 10px;
+  display: inline-block;
+  text-align: center;
 }
 
 .duty-card p {
@@ -200,4 +219,17 @@ nav ul li a {
 
 nav ul li a:hover {
   color: #4fb0e4;
+}
+.day-off-card {
+  background-color: #333344;
+  padding: 10px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+  cursor: pointer;
+  width: 200px;
+  color: gray;
+  border: 1px solid gray;
 }

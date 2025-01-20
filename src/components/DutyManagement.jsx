@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
@@ -14,7 +14,7 @@ const DutyManagement = () => {
     // Generate week range from Sunday to Saturday based on the selected date
     const calculateWeekRange = (date) => {
         const startOfWeek = moment(date).startOf("week").toDate(); // Sunday
-        const days = Array.from({ length: 7 }, (_, i) =>
+        const days = Array.from({length: 7}, (_, i) =>
             moment(startOfWeek).add(i, "days").format("YYYY-MM-DD")
         );
         setWeekRange(days); // Set the range for display
@@ -24,7 +24,7 @@ const DutyManagement = () => {
     // Fetch duties for the week from the API
     const fetchDuties = async (weekRange) => {
         try {
-            const response = await axios.post(`${BASE_URL}/duties/week`, { weekRange });
+            const response = await axios.post(`${BASE_URL}/duties/week`, {weekRange});
             if (response.data) {
                 setWeekData(response.data); // Update state with API data
             } else {
@@ -53,15 +53,13 @@ const DutyManagement = () => {
                     selected={selectedDate}
                     onChange={(date) => setSelectedDate(date)}
                     dateFormat="dd/MM/yyyy"
-                    highlightDates={weekRange.map((date) => new Date(date))} // Highlight week range
+                    highlightDates={weekRange.map((date) => new Date(date))}
                 />
                 <p>
                     Selected Week: {moment(weekRange[0]).format("DD MMM YYYY")} -{" "}
                     {moment(weekRange[6]).format("DD MMM YYYY")}
                 </p>
             </div>
-
-            {/* Weekly view */}
             <div className="week-view">
                 {weekData && weekData.length > 0 ? (
                     weekData.map((dayData, index) => (
@@ -74,31 +72,35 @@ const DutyManagement = () => {
                             }`}
                         >
                             <h3>{moment(dayData.date).format("dddd")}</h3>
-                            {dayData.duties.map((duty) => (
-                                <div
-                                    key={duty.id}
-                                    className="duty-card"
-                                    onMouseEnter={() => setHoveredDate(duty.date)} // Set hovered date
-                                    onMouseLeave={() => setHoveredDate(null)} // Clear hovered date
-                                >
-                                    <p><strong>Vehicle:</strong> {duty.vehicle}</p>
-                                    <p><strong>Driver:</strong> {duty.driver}</p>
-                                    <p><strong>Conductor:</strong> {duty.conductor}</p>
-                                    <p><strong>Start Time:</strong> {duty.startTime}</p>
-                                    <p><strong>Duration:</strong> {duty.duration}</p>
+                            {dayData.duties && dayData.duties.length > 0 ? (
+                                dayData.duties.map((duty) => (
+                                    <div
+                                        key={duty.id}
+                                        className="duty-card"
+                                    >
+                                        <p>
+                                            <strong>{moment(dayData.date).format("DD")}</strong> | {duty.vehicle} | {duty.driver}
+                                        </p>
+                                        <p>
+                                            {duty.startTime} - {duty.endTime} <span>PT: {duty.duration}</span>
+                                        </p>
 
-                                    {/* Inline label for the duty date */}
-                                    {hoveredDate === duty.date && (
-                                        <p className="hover-label">Date: {moment(duty.date).format("DD MMM YYYY")}</p>
-                                    )}
+                                        <div className="yellow-line"></div>
+                                    </div>
+
+                                ))
+                            ) : (
+                                <div className="day-off-card">
+                                    <p><strong>DAY OFF</strong></p>
                                 </div>
-                            ))}
+                            )}
                         </div>
                     ))
                 ) : (
                     <p>Loading duties for the week...</p>
                 )}
             </div>
+
         </div>
     );
 };
